@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="asientos_cab")
 @NamedQuery(name="Asiento.findAll", query="SELECT a FROM Asiento a")
 public class Asiento implements Serializable {
+	
 	private static final long serialVersionUID = 3103838628166979596L;
 
 	@Id

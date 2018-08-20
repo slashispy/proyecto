@@ -13,13 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 @Entity
 @Table(name="usuarios")
 @NamedQueries({
 	@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
 	@NamedQuery(name="Usuario.findByUsuario", query="SELECT u FROM Usuario u WHERE u.usuario = :usuario")
 	})
-
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

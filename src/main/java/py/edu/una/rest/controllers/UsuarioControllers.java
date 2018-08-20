@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.UsuarioService;
 import py.edu.una.rest.utils.ErrorDTO;
+import py.edu.una.rest.utils.PasswordService;
 
 @CrossOrigin
 @RestController
@@ -70,6 +71,7 @@ public class UsuarioControllers {
 		if (service.isExisteUsuario(usuario)) {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("ya existe el usuario"), HttpStatus.CONFLICT);
 		} else {
+			usuario.setClave(PasswordService.hashPassword(usuario.getClave()));
 			Usuario usuarioR = service.insertar(usuario);
 			return new ResponseEntity<Usuario>(usuarioR, HttpStatus.CREATED);
 		}

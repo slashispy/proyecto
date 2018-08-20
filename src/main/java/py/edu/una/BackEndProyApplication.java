@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Import;
 		"py.edu.una.rest.controllers",
 		"py.edu.una.rest.services",
 		"py.edu.una.rest.dao"})
-@Import(JpaConfiguration.class)
+@Import({JpaConfiguration.class, WebConfig.class})
+//@Import(JpaConfiguration.class)
 public class BackEndProyApplication {
 
 	public static void main(String[] args) {
