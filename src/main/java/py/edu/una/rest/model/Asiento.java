@@ -44,6 +44,8 @@ public class Asiento implements Serializable {
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy="asiento")
 //	@JoinColumn(name="id_asiento", nullable=false )
 	private List<DetalleAsiento> detalleAsientos;
+	
+	public Asiento() {}
 
 	public Integer getId() {
 		return id;

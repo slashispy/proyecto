@@ -35,7 +35,10 @@ public class DetalleAsiento implements Serializable {
 	
 //	@ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne
+	@JoinColumn(name="id_cuenta_contable")
 	private CuentaContable cuentaContable;
+	
+	public DetalleAsiento() {}
 
 	public Integer getId() {
 		return id;
