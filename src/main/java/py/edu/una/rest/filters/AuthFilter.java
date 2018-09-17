@@ -2,6 +2,7 @@ package py.edu.una.rest.filters;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -39,7 +40,15 @@ public class AuthFilter implements Filter {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			String authHeader = httpRequest.getHeader(AuthUtils.AUTH_HEADER_KEY);
+			Enumeration<String> prueba = httpRequest.getHeaderNames();
+			while ( prueba.hasMoreElements()) {
+				String headerName = prueba.nextElement();
+				logger.info("Header "+ headerName);
+				logger.info("getHeader "+httpRequest.getHeader(headerName));
+			}
+			logger.info("AuthHeader "+ authHeader);
 			if (StringUtils.isEmpty(authHeader) || authHeader.split(" ").length != 1) {
+				logger.error("No tiene token");
 				httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, AUTH_ERROR_MSG);
 			} else {
 				JWTClaimsSet claimSet = null;

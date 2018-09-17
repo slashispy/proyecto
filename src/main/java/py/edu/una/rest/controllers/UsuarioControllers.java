@@ -1,6 +1,7 @@
 package py.edu.una.rest.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,16 @@ public class UsuarioControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay Usuario con el siguiente ID: " + id),HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+		}
+	}
+	
+	@RequestMapping(value = "/user/{user}", method = RequestMethod.GET)
+	public ResponseEntity<?> getByUser(@PathVariable("user") String usuario) {
+		Optional<Usuario> user = service.getByUsuario(usuario);
+		if (!user.isPresent()) {
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay Usuario con el siguiente user: " + usuario),HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Optional<Usuario>>(user, HttpStatus.OK);
 		}
 	}
 

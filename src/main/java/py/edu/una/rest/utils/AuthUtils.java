@@ -21,7 +21,7 @@ public final class AuthUtils {
 	
 	private static final JWSHeader JWT_HEADER = new JWSHeader(JWSAlgorithm.HS256);
 	private static final String TOKEN_SECRET = "aliceinwonderland";
-	public static final String AUTH_HEADER_KEY = "Authorization";
+	public static final String AUTH_HEADER_KEY = "authorization";
 	
 	public static String getSubject(String authHeader) throws ParseException, JOSEException {
 		return decodeToken(authHeader).getSubject();
