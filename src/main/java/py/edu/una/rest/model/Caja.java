@@ -21,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="caja")
 @NamedQueries({
 	@NamedQuery(name="Caja.findAll", query="SELECT c FROM Caja c"),
-	@NamedQuery(name="Caja.findByUsuario", query="SELECT c FROM Caja c WHERE c.usuario = :usuario")
+	@NamedQuery(name="Caja.findByUsuario", query="SELECT c FROM Caja c WHERE c.usuario = :usuario"),
+	@NamedQuery(name="Caja.cajaAbierta", query="SELECT c FROM Caja WHERE c.estadoCaja = 'A'")
 	})
 public class Caja implements Serializable {
 	
