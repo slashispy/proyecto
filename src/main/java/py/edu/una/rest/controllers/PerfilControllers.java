@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import py.edu.una.rest.model.Perfil;
-import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.PerfilService;
 import py.edu.una.rest.utils.ErrorDTO;
 
@@ -102,7 +101,7 @@ public class PerfilControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Eliminacion Fallida, No existe Perfil con el id "+ id), HttpStatus.NOT_FOUND);
 		}
 		service.eliminar(id);
-		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Perfil>(HttpStatus.NO_CONTENT);
 	}
 
 }

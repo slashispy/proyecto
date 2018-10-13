@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import py.edu.una.rest.model.Producto;
-import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.ProductoService;
 import py.edu.una.rest.utils.ErrorDTO;
 
@@ -106,7 +105,7 @@ public class ProductoControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Eliminacion Fallida, No existe Producto con el id "+ id), HttpStatus.NOT_FOUND);
 		}
 		service.eliminar(id);
-		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Producto>(HttpStatus.NO_CONTENT);
 	}
 
 }

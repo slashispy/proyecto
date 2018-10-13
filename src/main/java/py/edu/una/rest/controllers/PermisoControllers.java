@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import py.edu.una.rest.model.Permiso;
-import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.PermisoService;
 import py.edu.una.rest.utils.ErrorDTO;
 
@@ -97,7 +96,7 @@ public class PermisoControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Eliminacion Fallida, No existe Permiso con el id "+ id), HttpStatus.NOT_FOUND);
 		}
 		service.eliminar(id);
-		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Permiso>(HttpStatus.NO_CONTENT);
 	}
 
 }

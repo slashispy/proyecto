@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import py.edu.una.rest.model.Cliente;
-import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.ClienteService;
 import py.edu.una.rest.utils.ErrorDTO;
 
@@ -98,7 +97,7 @@ public class ClienteControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Eliminacion Fallida, No existe Cliente con el id "+ id), HttpStatus.NOT_FOUND);
 		}
 		service.eliminar(id);
-		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Cliente>(HttpStatus.NO_CONTENT);
 	}
 
 }
