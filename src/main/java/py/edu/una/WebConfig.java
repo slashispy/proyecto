@@ -14,8 +14,8 @@ import py.edu.una.rest.filters.AuthFilter;
 public class WebConfig {
 	
 	@Bean
-    public FilterRegistrationBean authFilter() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    public FilterRegistrationBean<AuthFilter> authFilter() {
+        FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<AuthFilter>();
         registrationBean.setName("authFilter");
         registrationBean.addUrlPatterns("/*");
         AuthFilter authFilter = new AuthFilter();

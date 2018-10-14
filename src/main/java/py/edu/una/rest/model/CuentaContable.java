@@ -11,45 +11,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-/**
- * La clase de persistencia para la tabla cuentas_contables 
- * 
- */
 @Entity
-@Table(name="cuentas_contables")
-@NamedQuery(name="CuentaContable.findAll", query="SELECT c FROM CuentaContable c")
+@Table(name = "cuentas_contables")
+@NamedQueries({ 
+	@NamedQuery(name = "CuentaContable.findAll", query = "SELECT c FROM CuentaContable c"),
+	@NamedQuery(name = "CuentaContable.findByCodigo", query = "SELECT c FROM CuentaContable c WHERE c.codigo = :codigo") 
+})
 public class CuentaContable implements Serializable {
 
 	private static final long serialVersionUID = 3103838628166979596L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String codigo;
 
 	private String descripcion;
-	
+
 	private Integer nivel;
-	
-	@Column(name="tipo_cuenta", nullable=false)
-	private String tipoCuenta;  //D: DEUDORA, H: ACREEDORA
-	
-	@Column(name="numero_cuenta") 
+
+	@Column(name = "tipo_cuenta", nullable = false)
+	private String tipoCuenta; // D: DEUDORA, H: ACREEDORA
+
+	@Column(name = "numero_cuenta")
 	private String numeroCuenta;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="id_cuenta_padre",nullable=true)
-    private CuentaContable cuentaPadre;
-	
-    @OneToMany(mappedBy="cuentaPadre", cascade=CascadeType.PERSIST)
-    private List<CuentaContable> cuentasHijas;
-	
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_cuenta_padre", nullable = true)
+	private CuentaContable cuentaPadre;
+
+	@OneToMany(mappedBy = "cuentaPadre", cascade = CascadeType.PERSIST)
+	private List<CuentaContable> cuentasHijas;
+
 	private Boolean asentable;
 
 	public Integer getNivel() {
@@ -118,13 +117,13 @@ public class CuentaContable implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-//	public List<CuentaContable> getCuentasHijas() {
-//		return cuentasHijas;
-//	}
-//	
-//	public void setCuentasHijas(List<CuentaContable> cuentasHijas) {
-//		this.cuentasHijas = cuentasHijas;
-//	}
+
+	// public List<CuentaContable> getCuentasHijas() {
+	// return cuentasHijas;
+	// }
+	//
+	// public void setCuentasHijas(List<CuentaContable> cuentasHijas) {
+	// this.cuentasHijas = cuentasHijas;
+	// }
 
 }

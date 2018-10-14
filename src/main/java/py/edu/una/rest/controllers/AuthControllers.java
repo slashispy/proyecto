@@ -33,14 +33,14 @@ public class AuthControllers {
 	@Autowired
 	private UsuarioService service;
 	
-	private static final String CLIENT_ID_KEY = "client_id";
-	private static final String REDIRECT_URI_KEY = "redirect_uri";
-	private static final String CLIENT_SECRET = "client_secret";
-	private static final String CODE_KEY = "code";
-	private static final String GRANT_TYPE_KEY = "grant_type";
-	private static final String AUTH_CODE = "authorization_code";
-	
-	private static final String CONFLICT_MSG = "%s, ya existe una cuenta que te pertenece";
+//	private static final String CLIENT_ID_KEY = "client_id";
+//	private static final String REDIRECT_URI_KEY = "redirect_uri";
+//	private static final String CLIENT_SECRET = "client_secret";
+//	private static final String CODE_KEY = "code";
+//	private static final String GRANT_TYPE_KEY = "grant_type";
+//	private static final String AUTH_CODE = "authorization_code";
+//	
+//	private static final String CONFLICT_MSG = "%s, ya existe una cuenta que te pertenece";
 	private static final String NOT_FOUND_MSG = "Usuario no encontrado";
 	private static final String LOGING_ERROR_MSG = "Usuario y/o clave no validos";
 	
