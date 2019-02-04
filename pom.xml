@@ -103,8 +103,8 @@
 				<configuration>
 					<hostname>127.0.0.1</hostname>
 					<port>9990</port>
-					<username>admin</username>
-					<password>admin12345!</password>
+					<username>slash</username>
+					<password>andres91</password>
 				</configuration>
 			</plugin>
 		</plugins>

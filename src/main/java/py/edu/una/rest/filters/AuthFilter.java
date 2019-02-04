@@ -2,6 +2,8 @@ package py.edu.una.rest.filters;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,6 +32,8 @@ public class AuthFilter implements Filter {
 	private static final String AUTH_ERROR_MSG = "Asegurate que tu peticion tenga un Authorization header",
 			EXPIRE_ERROR_MSG = "El Token ha expirado", JWT_ERROR_MSG = "Error al parsear JWT",
 			JWT_INVALID_MSG = "Token JWT invalido";
+	
+	static final long ONE_MINUTE_IN_MILLIS=60000;
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -58,6 +62,9 @@ public class AuthFilter implements Filter {
 					if (new DateTime(claimSet.getExpirationTime()).isBefore(DateTime.now())) {
 						httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, EXPIRE_ERROR_MSG);
 					} else {
+						Calendar date = Calendar.getInstance();
+						long t= date.getTimeInMillis();
+						claimSet.setExpirationTime(new Date(t + 10 * ONE_MINUTE_IN_MILLIS));
 						chain.doFilter(request, response);
 					}
 				}
