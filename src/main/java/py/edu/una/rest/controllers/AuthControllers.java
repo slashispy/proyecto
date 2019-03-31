@@ -1,10 +1,13 @@
 package py.edu.una.rest.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
 
 import py.edu.una.rest.model.Credenciales;
+import py.edu.una.rest.model.Perfil;
 import py.edu.una.rest.model.Usuario;
+import py.edu.una.rest.services.PerfilService;
 import py.edu.una.rest.services.UsuarioService;
 import py.edu.una.rest.utils.AuthUtils;
 import py.edu.una.rest.utils.ErrorDTO;
@@ -34,6 +39,9 @@ public class AuthControllers {
 	@Autowired
 	private UsuarioService service;
 	
+	@Autowired
+	private PerfilService perfilService;
+	
 //	private static final String CLIENT_ID_KEY = "client_id";
 //	private static final String REDIRECT_URI_KEY = "redirect_uri";
 //	private static final String CLIENT_SECRET = "client_secret";
@@ -46,6 +54,8 @@ public class AuthControllers {
 	private static final String LOGING_ERROR_MSG = "Usuario y/o clave no validos";
 	
 	public static final ObjectMapper MAPPER = new ObjectMapper();
+	
+	public static final Logger logger = LoggerFactory.getLogger(AuthControllers.class);
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody @Valid Credenciales credenciales, final HttpServletRequest request)
@@ -79,6 +89,23 @@ public class AuthControllers {
 			final TokenDTO token = AuthUtils.createToken(request.getRemoteHost(), savedUser);
 			return new ResponseEntity<TokenDTO>(token,HttpStatus.CREATED);
 		}	
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "perfiles", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> listar() {
+		logger.info("Ejecutando Listar Perfiles");
+		List<Perfil> perfiles = perfilService.listar();
+		if (perfiles.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		} else {
+			try {
+				logger.info("Se obtuvo de la base de datos: " + MAPPER.writeValueAsString(perfiles));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return new ResponseEntity<List<Perfil>>(perfiles, HttpStatus.OK);
+		}
 	}
 	
 
