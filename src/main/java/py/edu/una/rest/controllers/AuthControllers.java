@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JOSEException;
 
@@ -40,7 +41,7 @@ public class AuthControllers {
 //	private static final String GRANT_TYPE_KEY = "grant_type";
 //	private static final String AUTH_CODE = "authorization_code";
 //	
-//	private static final String CONFLICT_MSG = "%s, ya existe una cuenta que te pertenece";
+	private static final String CONFLICT_MSG = "%s, ya existe una cuenta que te pertenece";
 	private static final String NOT_FOUND_MSG = "Usuario no encontrado";
 	private static final String LOGING_ERROR_MSG = "Usuario y/o clave no validos";
 	
@@ -59,6 +60,25 @@ public class AuthControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.UNAUTHORIZED);
 		}
 		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.UNAUTHORIZED);	
+	}
+	
+	@RequestMapping(value="registrer", method=RequestMethod.POST)
+	public ResponseEntity<?> registrer(@RequestBody @Valid Usuario credenciales, final HttpServletRequest request)
+			throws JOSEException {
+		try {
+			System.out.println(MAPPER.writeValueAsString(credenciales));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		final Optional<Usuario> foundUser = service.getByUsuario(credenciales.getUsuario());
+		if (foundUser.isPresent()){
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO(String.format(CONFLICT_MSG,credenciales.getUsuario())),HttpStatus.UNAUTHORIZED);
+		}else {
+			credenciales.setClave(PasswordService.hashPassword(credenciales.getClave()));
+			Usuario savedUser = service.insertar(credenciales);
+			final TokenDTO token = AuthUtils.createToken(request.getRemoteHost(), savedUser);
+			return new ResponseEntity<TokenDTO>(token,HttpStatus.CREATED);
+		}	
 	}
 	
 

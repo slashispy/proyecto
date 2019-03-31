@@ -31,8 +31,6 @@ public class Producto implements Serializable {
 	
 	private String descripcion;
 	
-	private BigInteger cantidad;
-	
 	private String estado;
 	
 	@Column(name="controlar_stock")
@@ -68,14 +66,6 @@ public class Producto implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public BigInteger getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(BigInteger cantidad) {
-		this.cantidad = cantidad;
 	}
 
 	public String getEstado() {

@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="usuarios")
@@ -26,9 +27,11 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String apellido;
+	@NotNull
 	private String clave;
 	private String email;
 	private String nombre;
+	@NotNull
 	private String usuario;
 	private String estado;
 	

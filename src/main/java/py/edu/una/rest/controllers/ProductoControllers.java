@@ -88,7 +88,6 @@ public class ProductoControllers {
 		}
 		product.setDescripcion(pactualiza.getDescripcion());
 		product.setEstado(pactualiza.getEstado());
-		product.setCantidad(pactualiza.getCantidad());
 		product.setCantidadMinima(pactualiza.getCantidadMinima());
 		product.setPrecioUnitario(pactualiza.getPrecioUnitario());
 		product.setControlarStock(pactualiza.getControlarStock());

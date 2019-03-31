@@ -55,7 +55,7 @@ public class UsuarioDAOImpl extends AbstractDAO<Usuario> implements UsuarioDAO {
 					.getSingleResult());
 		}catch(NoResultException e){
 			e.printStackTrace();
-			return null;
+			return Optional.ofNullable(null);
 		}
 		
 	}
