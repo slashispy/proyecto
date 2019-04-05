@@ -35,7 +35,7 @@ public class CuentaContableControllers {
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> listarClientes() {
+	public ResponseEntity<?> listarCuentasContables() {
 		logger.info("Ejecutando Listar");
 		List<CuentaContable> cuentas = service.listar();
 		if (cuentas.isEmpty()) {

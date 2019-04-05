@@ -43,8 +43,8 @@ public class AuthFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			if (!(((HttpServletRequest) request).getRequestURI().endsWith("/auth/login")
-					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/registrer"))
-					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/perfiles")) {
+					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/registrer")
+					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/perfiles"))) {
 				String authHeader = httpRequest.getHeader(AuthUtils.AUTH_HEADER_KEY);
 				if (StringUtils.isEmpty(authHeader) || authHeader.split(" ").length != 1) {
 					httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, AUTH_ERROR_MSG);
