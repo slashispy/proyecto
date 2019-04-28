@@ -1,5 +1,6 @@
 package py.edu.una.rest.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import py.edu.una.rest.model.Perfil;
+import py.edu.una.rest.model.Permiso;
 import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.UsuarioService;
 import py.edu.una.rest.utils.ErrorDTO;
@@ -117,6 +120,32 @@ public class UsuarioControllers {
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(value = "permisos/{usuario}", method = RequestMethod.GET)
+	public ResponseEntity<?> obtenerPermisos(@PathVariable("usuario") String usuario){
+		logger.info("Obtener Permisos del Usuario {}",usuario);
+		Optional<Usuario> user = service.getByUsuario(usuario);
+		if(!user.isPresent()) {
+			logger.error("Usuario inexistente");
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Usuario inexistente"), HttpStatus.NOT_FOUND);
+		}else {
+			List<Permiso> permisos = new ArrayList<>();
+			for(Perfil per: user.get().getPerfiles()){
+				for(Permiso permi: per.getPermisos()) {
+					if(!permisos.contains(permi)) {
+						permisos.add(permi);
+					}
+				}
+			}
+			if(permisos.isEmpty()) {
+				logger.error("No se pudo obteners los Permisos");
+				return new ResponseEntity<ErrorDTO>(new ErrorDTO("No se pudo obteners los Permisos"), HttpStatus.NOT_FOUND);
+			}else {
+				return new ResponseEntity<List<Permiso>>(permisos, HttpStatus.OK);
+			}
+		}
+		
 	}
 
 }
