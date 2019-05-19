@@ -50,12 +50,12 @@ public class Compra implements Serializable {
 	private TipoTransaccion tipoCompra;
 	
 	@OneToOne
-	@JoinColumn(name="id_asiento")
+	@JoinColumn(name="id_asiento", nullable=true)
 	private Asiento asiento;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="id_caja")
+	@JoinColumn(name="id_caja", nullable = true)
 	private Caja caja;
 	
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy="compra")
