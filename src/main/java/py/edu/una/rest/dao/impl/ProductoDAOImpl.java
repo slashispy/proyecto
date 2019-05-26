@@ -1,5 +1,6 @@
 package py.edu.una.rest.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.NoResultException;
@@ -27,6 +28,20 @@ public class ProductoDAOImpl extends AbstractDAO<Producto> implements ProductoDA
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Producto> getByEstado(String estado) {
+		try {
+			return em.createNamedQuery("Producto.findByEstado")
+					.setParameter("estado", estado)
+					.getResultList();
+		}catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

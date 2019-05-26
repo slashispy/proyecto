@@ -54,4 +54,9 @@ public class ProductoServiceImpl implements ProductoService {
 		return dao.getByCodigo(prod.getCodigo()) == null ? false : true;
 	}
 
+	@Override
+	public List<Producto> getByEstado(String estado) {
+		return dao.getByEstado(estado);
+	}
+
 }

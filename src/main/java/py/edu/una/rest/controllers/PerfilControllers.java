@@ -88,6 +88,7 @@ public class PerfilControllers {
 		}
 		profile.setDescripcion(pactualiza.getDescripcion());
 		profile.setEstado(pactualiza.getEstado());
+		profile.setPermisos(pactualiza.getPermisos());
 		service.actualizar(profile);
 		return new ResponseEntity<Perfil>(profile, HttpStatus.OK);	
 	}
