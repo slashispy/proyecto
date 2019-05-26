@@ -13,8 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tipo_transacciones")
 @NamedQueries({
-	@NamedQuery(name="TipoTranasaccion.findAll", query="SELECT t FROM TipoTransaccion t"),
-	@NamedQuery(name="TipoTranasaccion.findByCodigo", query="SELECT t FROM TipoTransaccion t WHERE t.codigo = :codigo")
+	@NamedQuery(name="TipoTransaccion.findAll", query="SELECT t FROM TipoTransaccion t"),
+	@NamedQuery(name="TipoTransaccion.findByCodigo", query="SELECT t FROM TipoTransaccion t WHERE t.codigo = :codigo"),
+	@NamedQuery(name="TipoTransaccion.filterByUso", query="SELECT t FROM TipoTransaccion t WHERE t.uso = :uso")
 	})
 public class TipoTransaccion implements Serializable {
 	
@@ -27,6 +28,8 @@ public class TipoTransaccion implements Serializable {
 	private String codigo;
 	
 	private String descripcion;
+	
+	private String uso;
 	
 	public TipoTransaccion() {}
 
@@ -53,6 +56,16 @@ public class TipoTransaccion implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getUso() {
+		return uso;
+	}
+
+	public void setUso(String uso) {
+		this.uso = uso;
+	}
+	
+	
 	
 	
 	

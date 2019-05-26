@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @Table(name="proveedores")
 @NamedQueries({
 	@NamedQuery(name="Proveedor.findAll", query="SELECT p FROM Proveedor p"),
-	@NamedQuery(name="Proveedor.findByRuc", query="SELECT p FROM Proveedor p WHERE p.ruc = :ruc")
+	@NamedQuery(name="Proveedor.findByRuc", query="SELECT p FROM Proveedor p WHERE p.ruc = :ruc"),
+	@NamedQuery(name="Proveedor.findByEstado", query="SELECT p FROM Proveedor p WHERE p.estado = :estado")
 	})
 public class Proveedor implements Serializable {
 	

@@ -55,4 +55,17 @@ public class ProveedorDAOImpl extends AbstractDAO<Proveedor> implements Proveedo
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Proveedor> getByEstado(String estado) {
+		try {
+			return em.createNamedQuery("Proveedor.findByEstado")
+					.setParameter("estado", estado)
+					.getResultList();
+		}catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

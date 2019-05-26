@@ -17,7 +17,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 	@Autowired
 	private ProveedorDAO dao;
 	
-	@Override
+	@Override  
 	public List<Proveedor> listar() {
 		return dao.listar();
 	}
@@ -50,6 +50,11 @@ public class ProveedorServiceImpl implements ProveedorService {
 	@Override
 	public boolean isExisteProveedor(Proveedor proveedor) {
 		return dao.getByRuc(proveedor.getRuc()) == null ? false : true ;
+	}
+
+	@Override
+	public List<Proveedor> getByEstado(String estado) {
+		return dao.getByEstado(estado);
 	}
 
 }
