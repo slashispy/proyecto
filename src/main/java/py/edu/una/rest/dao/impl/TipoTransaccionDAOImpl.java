@@ -55,4 +55,16 @@ public class TipoTransaccionDAOImpl extends AbstractDAO<TipoTransaccion> impleme
 		}
 	}
 
+	@Override
+	public TipoTransaccion getByCodigo(String codigo) {
+		try {
+			return (TipoTransaccion) em.createNamedQuery("TipoTransaccion.findByCodigo")
+					.setParameter("codigo", codigo)
+					.getSingleResult();
+		}catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

@@ -8,5 +8,6 @@ public interface TipoTransaccionService extends GenericCrudService<TipoTransacci
 	List<TipoTransaccion> obtenerTransaccionesCompra();
 	List<TipoTransaccion> obtenerTransaccionesVenta();
 	List<TipoTransaccion> obtenerTransaccionesAjustes();
+	boolean isExisteTipoTransaccion(TipoTransaccion tipoTransaccion);
 
 }
