@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import py.edu.una.rest.dao.CompraDAO;
 import py.edu.una.rest.dao.ParametroDAO;
 import py.edu.una.rest.model.Compra;
+import py.edu.una.rest.model.DetalleCompra;
 import py.edu.una.rest.model.Parametro;
 import py.edu.una.rest.services.CompraService;
 
@@ -42,6 +43,9 @@ public class CompraServicieImpl implements CompraService {
 		}
 		if("S".equalsIgnoreCase(contaParam.getValor())) {
 			//Do Contabilidad
+		}
+		for(DetalleCompra w: obj.getDetalleCompras()) {
+			w.setCompra(obj);
 		}
 		return compraDao.insertar(obj);
 	}

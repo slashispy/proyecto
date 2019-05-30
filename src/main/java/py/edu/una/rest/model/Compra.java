@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="compras_cab")
@@ -137,6 +138,9 @@ public class Compra implements Serializable {
 	}
 
 	public List<DetalleCompra> getDetalleCompras() {
+		for (DetalleCompra w: detalleCompras) {
+			w.setCompra(null);
+		}
 		return detalleCompras;
 	}
 

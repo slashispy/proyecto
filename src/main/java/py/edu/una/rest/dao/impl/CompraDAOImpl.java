@@ -40,5 +40,4 @@ public class CompraDAOImpl extends AbstractDAO<Compra> implements CompraDAO {
 		super.eliminar(id);
 
 	}
-
 }
