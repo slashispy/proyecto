@@ -35,6 +35,11 @@ public class CompraServicieImpl implements CompraService {
 	@Override
 	public Compra insertar(Compra obj) {
 		Parametro contaParam = parametrosDao.getByClave("Contabilidad");
+		if(contaParam == null) {
+			contaParam = new Parametro();
+			contaParam.setClave("Contabilidad");
+			contaParam.setValor("N");
+		}
 		if("S".equalsIgnoreCase(contaParam.getValor())) {
 			//Do Contabilidad
 		}

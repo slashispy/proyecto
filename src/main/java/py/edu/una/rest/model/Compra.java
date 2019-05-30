@@ -135,6 +135,16 @@ public class Compra implements Serializable {
 	public void setCaja(Caja caja) {
 		this.caja = caja;
 	}
+
+	public List<DetalleCompra> getDetalleCompras() {
+		return detalleCompras;
+	}
+
+	public void setDetalleCompras(List<DetalleCompra> detalleCompras) {
+		this.detalleCompras = detalleCompras;
+	}
+	
+	
 	
 	
 
