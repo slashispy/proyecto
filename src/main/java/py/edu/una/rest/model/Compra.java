@@ -18,12 +18,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="compras_cab")
 @NamedQuery(name="Compra.findAll", query="SELECT c FROM Compra c")
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Compra implements Serializable {
 	
 	private static final long serialVersionUID = 3103838628166979596L;

@@ -13,9 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 @Entity
 @Table(name="compras_det")
 @NamedQuery(name="DetalleCompra.findAll", query="SELECT d FROM DetalleCompra d")
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class DetalleCompra implements Serializable {
 
 	private static final long serialVersionUID = 3103838628166979596L;
