@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,7 +26,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="compras_cab")
-@NamedQuery(name="Compra.findAll", query="SELECT c FROM Compra c")
+@NamedQueries({
+	@NamedQuery(name="Compra.findAll", query="SELECT c FROM Compra c"),
+	@NamedQuery(name="Compra.findByEstado", query="SELECT c FROM Compra c WHERE c.estado = :estado")
+})
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Compra implements Serializable {
@@ -45,6 +49,10 @@ public class Compra implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_proveedor")
 	private Proveedor proveedor;
+	
+	private String estado;
+	
+	private String timbrado;
 	
 	private BigDecimal importe;
 	
@@ -100,6 +108,14 @@ public class Compra implements Serializable {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
+	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
 	public BigDecimal getImporte() {
 		return importe;
@@ -151,6 +167,16 @@ public class Compra implements Serializable {
 	public void setDetalleCompras(List<DetalleCompra> detalleCompras) {
 		this.detalleCompras = detalleCompras;
 	}
+
+	public String getTimbrado() {
+		return timbrado;
+	}
+
+	public void setTimbrado(String timbrado) {
+		this.timbrado = timbrado;
+	}
+	
+	
 	
 	
 	

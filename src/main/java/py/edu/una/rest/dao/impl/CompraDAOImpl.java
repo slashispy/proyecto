@@ -2,6 +2,8 @@ package py.edu.una.rest.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Repository;
 
 import py.edu.una.rest.dao.AbstractDAO;
@@ -39,5 +41,18 @@ public class CompraDAOImpl extends AbstractDAO<Compra> implements CompraDAO {
 	public void eliminar(Integer id) {
 		super.eliminar(id);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Compra> getByEstado(String estado) {
+		try {
+			return em.createNamedQuery("Compra.findByEstado")
+					.setParameter("estado", estado)
+					.getResultList();
+		}catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

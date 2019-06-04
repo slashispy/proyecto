@@ -44,6 +44,7 @@ public class CompraServicieImpl implements CompraService {
 		if("S".equalsIgnoreCase(contaParam.getValor())) {
 			//Do Contabilidad
 		}
+		obj.setEstado("P");
 		for(DetalleCompra w: obj.getDetalleCompras()) {
 			w.setCompra(obj);
 		}
@@ -59,6 +60,11 @@ public class CompraServicieImpl implements CompraService {
 	public void eliminar(Integer id) {
 		compraDao.eliminar(id);
 
+	}
+
+	@Override
+	public List<Compra> getByEstado(String estado) {
+		return compraDao.getByEstado(estado);
 	}
 
 }
