@@ -12,6 +12,10 @@ public class Credenciales implements Serializable{
 	private String usuario;
 	@NotNull
 	private String password;
+	
+	private String nuevoPassword;
+	
+	public Credenciales() {}
 
 	public String getUsuario() {
 		return usuario;
@@ -25,5 +29,13 @@ public class Credenciales implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getNuevoPassword() {
+		return nuevoPassword;
+	}
+	public void setNuevoPassword(String nuevoPassword) {
+		this.nuevoPassword = nuevoPassword;
+	}
+	
+	
 
 }

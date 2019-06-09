@@ -108,5 +108,20 @@ public class AuthControllers {
 		}
 	}
 	
+	@RequestMapping(value="cambiarPass", method=RequestMethod.POST)
+	public ResponseEntity<?> cambiarContraseña (@RequestBody @Valid Credenciales cre) {
+		final Optional<Usuario> foundUser = service.getByUsuario(cre.getUsuario());
+		if (foundUser.isPresent()){
+			if(PasswordService.checkPassword(cre.getPassword(), foundUser.get().getClave())) {
+				foundUser.get().setClave(PasswordService.hashPassword(cre.getNuevoPassword()));
+				service.actualizar(foundUser.get());
+				return new ResponseEntity<ErrorDTO>(HttpStatus.OK);
+			}
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.UNAUTHORIZED);
+		}
+		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.UNAUTHORIZED);
+		
+	}
+	
 
 }

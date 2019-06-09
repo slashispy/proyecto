@@ -44,6 +44,7 @@ public class AuthFilter implements Filter {
 		} else {
 			if (!(((HttpServletRequest) request).getRequestURI().endsWith("/auth/login")
 					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/registrer")
+					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/cambiarPass")
 					|| ((HttpServletRequest) request).getRequestURI().endsWith("/auth/perfiles"))) {
 				String authHeader = httpRequest.getHeader(AuthUtils.AUTH_HEADER_KEY);
 				if (StringUtils.isEmpty(authHeader) || authHeader.split(" ").length != 1) {
