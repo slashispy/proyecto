@@ -1,7 +1,6 @@
 package py.edu.una.rest.dao.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.NoResultException;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import py.edu.una.rest.dao.AbstractDAO;
 import py.edu.una.rest.dao.MedioPagoDAO;
 import py.edu.una.rest.model.MedioPago;
-import py.edu.una.rest.model.Producto;
 
 @Repository("medioPagoDao")
 public class MedioPagoDAOImpl extends AbstractDAO<MedioPago> implements MedioPagoDAO {

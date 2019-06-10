@@ -13,16 +13,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="ventas_cab")
-@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v")
+@NamedQueries({
+	@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v"),
+	@NamedQuery(name="Venta.findByEstado", query="SELECT v FROM Venta v WHERE v.estado = :estado")
+})
 public class Venta implements Serializable {
 	
 	private static final long serialVersionUID = 3103838628166979596L;
@@ -41,9 +46,10 @@ public class Venta implements Serializable {
 	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
 	
-	@ManyToOne
-	@JoinColumn(name="id_medio_pago")
-	private MedioPago medioPago;
+	@OneToMany(cascade=CascadeType.PERSIST)
+	@NotEmpty
+	@JoinColumn(name="id_venta")
+	private List<VentaDetalleMedioPago> mediosPago;
 	
 	private BigDecimal importe;
 	
@@ -65,7 +71,20 @@ public class Venta implements Serializable {
 //	@JoinColumn(name="id_asiento", nullable=false )
 	private List<DetalleVenta> detalleVenta;
 	
+	private String estado;
+	
 	public Venta() {}
+
+	public List<DetalleVenta> getDetalleVenta() {
+		for (DetalleVenta w: detalleVenta) {
+			w.setVenta(null);
+		}
+		return detalleVenta;
+	}
+
+	public void setDetalleVenta(List<DetalleVenta> detalleVenta) {
+		this.detalleVenta = detalleVenta;
+	}
 
 	public Integer getId() {
 		return id;
@@ -99,12 +118,12 @@ public class Venta implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public MedioPago getMedioPago() {
-		return medioPago;
+	public List<VentaDetalleMedioPago> getMediosPago() {
+		return mediosPago;
 	}
 
-	public void setMedioPago(MedioPago medioPago) {
-		this.medioPago = medioPago;
+	public void setMediosPago(List<VentaDetalleMedioPago> medioPago) {
+		this.mediosPago = medioPago;
 	}
 
 	public BigDecimal getImporte() {
@@ -145,6 +164,14 @@ public class Venta implements Serializable {
 
 	public void setAsiento(Asiento asiento) {
 		this.asiento = asiento;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	
