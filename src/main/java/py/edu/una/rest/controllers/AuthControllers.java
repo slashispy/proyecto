@@ -67,9 +67,9 @@ public class AuthControllers {
 				final TokenDTO token = AuthUtils.createToken(request.getRemoteHost(), foundUser.get());
 				return new ResponseEntity<TokenDTO>(token,HttpStatus.OK);
 			}
-			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.UNAUTHORIZED);	
+		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.BAD_REQUEST);	
 	}
 	
 	@RequestMapping(value="registrer", method=RequestMethod.POST)
@@ -117,9 +117,9 @@ public class AuthControllers {
 				service.actualizar(foundUser.get());
 				return new ResponseEntity<ErrorDTO>(HttpStatus.OK);
 			}
-			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO(LOGING_ERROR_MSG),HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<ErrorDTO>(new ErrorDTO(NOT_FOUND_MSG),HttpStatus.BAD_REQUEST);
 		
 	}
 	
