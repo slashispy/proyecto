@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="caja")
 @NamedQueries({
 	@NamedQuery(name="Caja.findAll", query="SELECT c FROM Caja c"),
-	@NamedQuery(name="Caja.findByUsuario", query="SELECT c FROM Caja c WHERE c.usuario = :usuario"),
-	@NamedQuery(name="Caja.cajaAbierta", query="SELECT c FROM Caja c WHERE c.estadoCaja = 'A'")
+	@NamedQuery(name="Caja.findByUsuario", query="SELECT c FROM Caja c WHERE c.usuario = :usuario AND c.uso = :uso"),
+	@NamedQuery(name="Caja.cajaAbierta", query="SELECT c FROM Caja c WHERE c.estadoCaja = 'A' AND c.uso = :uso AND c.usuario = :usuario")
 	})
 public class Caja implements Serializable {
 	
@@ -52,6 +52,8 @@ public class Caja implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_usuario", nullable = false)
 	private Usuario usuario;
+	
+	private String uso;
 	
 	public Caja() {}
 
@@ -110,6 +112,16 @@ public class Caja implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getUso() {
+		return uso;
+	}
+
+	public void setUso(String uso) {
+		this.uso = uso;
+	}
+	
+	
 	
 	
 

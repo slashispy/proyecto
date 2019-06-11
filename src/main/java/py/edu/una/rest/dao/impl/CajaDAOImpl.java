@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import py.edu.una.rest.dao.AbstractDAO;
 import py.edu.una.rest.dao.CajaDAO;
 import py.edu.una.rest.model.Caja;
+import py.edu.una.rest.model.Usuario;
 
 @Repository("cajaDao")
 public class CajaDAOImpl extends AbstractDAO<Caja> implements CajaDAO {
@@ -44,9 +45,12 @@ public class CajaDAOImpl extends AbstractDAO<Caja> implements CajaDAO {
 	}
 
 	@Override
-	public Caja getCajaAbierta() {
+	public Caja getCajaAbierta(String uso, Usuario usuario) {
 		try {
-			return (Caja)em.createNamedQuery("Caja.cajaAbierta").getSingleResult();
+			return (Caja)em.createNamedQuery("Caja.cajaAbierta")
+					.setParameter("uso", uso)
+					.setParameter("usuario", usuario)
+					.getSingleResult();
 		}catch(NoResultException e) {
 			e.printStackTrace();
 			return null;

@@ -1,5 +1,7 @@
 package py.edu.una.rest.controllers;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import py.edu.una.rest.model.Caja;
+import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.CajaService;
+import py.edu.una.rest.services.UsuarioService;
 import py.edu.una.rest.utils.ErrorDTO;
 
 @CrossOrigin
@@ -26,15 +31,22 @@ public class CajaControllers {
 
 	@Autowired
 	private CajaService service;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	public static final Logger logger = LoggerFactory.getLogger(CajaControllers.class);
 
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> getCajaAbierta(){
+	public ResponseEntity<?> getCajaAbierta(@RequestParam String uso, @RequestParam String usuario){
+		Optional<Usuario> user = usuarioService.getByUsuario(usuario);
+		if(!user.isPresent()) {
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Usuario no valido"), HttpStatus.NOT_FOUND);
+		}
 		logger.info("Obteniendo Caja Abierta: ");
-		Caja cajaA = service.getCajaAbierta();
+		Caja cajaA = service.getCajaAbierta(uso, user.get());
 		if(cajaA == null) {
 			logger.error("No hay Cajas Abiertas.");
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay Cajas Abiertas."), HttpStatus.NOT_FOUND);
@@ -55,7 +67,7 @@ public class CajaControllers {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> cerarCaja(@RequestBody Caja cactualiza, @PathVariable("id") Integer id){
+	public ResponseEntity<?> cerrarCaja(@RequestBody Caja cactualiza, @PathVariable("id") Integer id){
 		Caja caja = service.getById(id);
 		if(caja == null) {
 			logger.error("Cierre Fallida. No existe Caja con id {}.", id);

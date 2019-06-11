@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import py.edu.una.rest.dao.CajaDAO;
 import py.edu.una.rest.model.Caja;
+import py.edu.una.rest.model.Usuario;
 import py.edu.una.rest.services.CajaService;
 
 @Service("cajaService")
@@ -44,8 +45,8 @@ public class CajaServiceImpl implements CajaService {
 	}
 
 	@Override
-	public Caja getCajaAbierta() {
-		return dao.getCajaAbierta();
+	public Caja getCajaAbierta(String uso, Usuario usuario) {
+		return dao.getCajaAbierta(uso, usuario);
 	}
 
 }
