@@ -25,7 +25,6 @@ public class ProductoDAOImpl extends AbstractDAO<Producto> implements ProductoDA
 					.setParameter("codigo", codigo)
 					.getSingleResult());
 		}catch(NoResultException e){
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -38,7 +37,6 @@ public class ProductoDAOImpl extends AbstractDAO<Producto> implements ProductoDA
 					.setParameter("estado", estado)
 					.getResultList();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 		

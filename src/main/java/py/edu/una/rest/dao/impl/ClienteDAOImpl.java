@@ -50,7 +50,6 @@ public class ClienteDAOImpl extends AbstractDAO<Cliente> implements ClienteDAO {
 					.setParameter("ruc", ruc)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 		

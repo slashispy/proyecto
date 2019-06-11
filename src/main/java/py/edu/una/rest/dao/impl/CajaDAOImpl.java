@@ -52,7 +52,6 @@ public class CajaDAOImpl extends AbstractDAO<Caja> implements CajaDAO {
 					.setParameter("usuario", usuario)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 		

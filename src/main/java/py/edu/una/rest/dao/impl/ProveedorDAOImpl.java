@@ -49,7 +49,6 @@ public class ProveedorDAOImpl extends AbstractDAO<Proveedor> implements Proveedo
 					.setParameter("ruc", ruc)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 		
@@ -63,7 +62,6 @@ public class ProveedorDAOImpl extends AbstractDAO<Proveedor> implements Proveedo
 					.setParameter("estado", estado)
 					.getResultList();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

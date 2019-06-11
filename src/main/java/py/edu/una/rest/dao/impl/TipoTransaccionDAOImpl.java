@@ -50,7 +50,6 @@ public class TipoTransaccionDAOImpl extends AbstractDAO<TipoTransaccion> impleme
 					.setParameter("uso", uso)
 					.getResultList();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -62,7 +61,6 @@ public class TipoTransaccionDAOImpl extends AbstractDAO<TipoTransaccion> impleme
 					.setParameter("codigo", codigo)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

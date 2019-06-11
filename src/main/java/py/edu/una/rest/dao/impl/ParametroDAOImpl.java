@@ -50,7 +50,6 @@ public class ParametroDAOImpl extends AbstractDAO<Parametro> implements Parametr
 					.setParameter("clave", clave)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

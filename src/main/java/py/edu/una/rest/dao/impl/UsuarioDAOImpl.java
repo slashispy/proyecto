@@ -54,7 +54,6 @@ public class UsuarioDAOImpl extends AbstractDAO<Usuario> implements UsuarioDAO {
 					.setParameter("usuario", usuario)
 					.getSingleResult());
 		}catch(NoResultException e){
-			e.printStackTrace();
 			return Optional.ofNullable(null);
 		}
 		

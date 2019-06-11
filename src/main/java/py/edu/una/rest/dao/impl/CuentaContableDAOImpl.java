@@ -49,7 +49,6 @@ public class CuentaContableDAOImpl extends AbstractDAO<CuentaContable> implement
 					.setParameter("codigo", codigo)
 					.getSingleResult();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 		

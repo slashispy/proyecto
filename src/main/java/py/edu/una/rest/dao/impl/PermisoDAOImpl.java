@@ -51,7 +51,6 @@ public class PermisoDAOImpl extends AbstractDAO<Permiso> implements PermisoDAO {
 					.setParameter("codigo", codigo)
 					.getSingleResult());
 		}catch(NoResultException e){
-			e.printStackTrace();
 			return null;
 		}
 	}

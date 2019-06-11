@@ -52,7 +52,6 @@ public class PerfilDAOImpl extends AbstractDAO<Perfil> implements PerfilDAO {
 					.setParameter("codigo", codigo)
 					.getSingleResult());
 		}catch(NoResultException e){
-			e.printStackTrace();
 			return null;
 		}
 	}

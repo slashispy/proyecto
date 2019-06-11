@@ -51,7 +51,6 @@ public class CompraDAOImpl extends AbstractDAO<Compra> implements CompraDAO {
 					.setParameter("estado", estado)
 					.getResultList();
 		}catch(NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

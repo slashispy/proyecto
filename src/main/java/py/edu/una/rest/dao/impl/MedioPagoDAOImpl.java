@@ -50,7 +50,6 @@ public class MedioPagoDAOImpl extends AbstractDAO<MedioPago> implements MedioPag
 					.setParameter("codigo", codigo)
 					.getSingleResult();
 		}catch(NoResultException e){
-			e.printStackTrace();
 			return null;
 		}
 	}
