@@ -73,6 +73,8 @@ public class Venta implements Serializable {
 	
 	private String estado;
 	
+	private String timbrado;
+	
 	public Venta() {}
 
 	public List<DetalleVenta> getDetalleVenta() {
@@ -173,9 +175,13 @@ public class Venta implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
 
+	public String getTimbrado() {
+		return timbrado;
+	}
+
+	public void setTimbrado(String timbrado) {
+		this.timbrado = timbrado;
+	}
+	
 }
