@@ -34,6 +34,10 @@ public class DetalleAjuste implements Serializable {
 	@JoinColumn(name="id_ajuste" )
 	private Ajuste ajuste;
 	
+	@ManyToOne
+	@JoinColumn(name="id_producto")
+	private Producto producto;
+	
 	private BigDecimal cantidad;
 	
 	@Column(name="precio_unitario")
@@ -92,5 +96,15 @@ public class DetalleAjuste implements Serializable {
 	public void setImporte(BigDecimal importe) {
 		this.importe = importe;
 	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	
+	
 	
 }
