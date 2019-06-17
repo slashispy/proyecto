@@ -59,4 +59,9 @@ public class ProductoServiceImpl implements ProductoService {
 		return dao.getByEstado(estado);
 	}
 
+	@Override
+	public List<Producto> getByControlarStock(String controlarStock) {
+		return dao.getByControlarStock(controlarStock);
+	}
+
 }

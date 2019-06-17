@@ -42,4 +42,16 @@ public class ProductoDAOImpl extends AbstractDAO<Producto> implements ProductoDA
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Producto> getByControlarStock(String controlarStock) {
+		try {
+			return em.createNamedQuery("Producto.findByControlarStock")
+					.setParameter("controlarStock", controlarStock)
+					.getResultList();
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
+
 }

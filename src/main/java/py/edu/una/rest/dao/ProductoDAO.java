@@ -8,4 +8,5 @@ import py.edu.una.rest.model.Producto;
 public interface ProductoDAO extends GenericDAO<Producto> {
 	Optional<Producto> getByCodigo(String codigo);
 	List<Producto> getByEstado(String estado);
+	List<Producto> getByControlarStock(String controlarStock);
 }

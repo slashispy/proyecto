@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import py.edu.una.rest.model.Producto;
 import py.edu.una.rest.model.Stock;
 import py.edu.una.rest.services.StockService;
 import py.edu.una.rest.utils.ErrorDTO;
@@ -27,7 +28,7 @@ public class StockControllers {
 	
 	@Autowired
 	private StockService service;
-
+	
 	public static final Logger logger = LoggerFactory.getLogger(StockControllers.class);
 
 	private ObjectMapper mapper = new ObjectMapper();
@@ -57,6 +58,24 @@ public class StockControllers {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay en Stock el siguiente producto con ID: " + id),HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Stock>(supplier, HttpStatus.OK);
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/disponible", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> obtenerProductosStock() {
+		logger.info("Ejecutando Stock Disponible");
+		List<Producto> stock = service.obtenerStockDisponible();
+		
+		if (stock.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		} else {
+			try {
+				logger.info("Se obtuvo de la base de datos: " + mapper.writeValueAsString(stock));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return new ResponseEntity<List<Producto>>(stock, HttpStatus.OK);
 		}
 	}
 

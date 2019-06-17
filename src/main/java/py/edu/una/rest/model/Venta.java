@@ -75,7 +75,17 @@ public class Venta implements Serializable {
 	
 	private String timbrado;
 	
+	private String ruc;
+	
 	public Venta() {}
+	
+	public String getRuc() {
+		return ruc;
+	}
+
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
+	}
 
 	public List<DetalleVenta> getDetalleVenta() {
 		for (DetalleVenta w: detalleVenta) {
