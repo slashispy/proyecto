@@ -1,6 +1,5 @@
 package py.edu.una.rest.services.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,20 @@ public class VentaServiceImpl implements VentaService {
 			//Do Contabilidad
 		}
 		obj.setEstado("A");
-		obj.setFecha(new Date());
+		Parametro rucParam = parametrosDao.getByClave("RUC");
+		if(rucParam == null) {
+			rucParam = new Parametro();
+			rucParam.setClave("RUC");
+			rucParam.setValor("000000000-0");
+		}
+		obj.setRuc(rucParam.getValor());
+		Parametro timbradoParam = parametrosDao.getByClave("TIMBRADO");
+		if(timbradoParam == null) {
+			timbradoParam = new Parametro();
+			timbradoParam.setClave("TIMBRADO");
+			timbradoParam.setValor("0000000000");
+		}
+		obj.setTimbrado(timbradoParam.getValor());
 		for(DetalleVenta w: obj.getDetalleVenta()) {
 			w.setVenta(obj);
 		}
