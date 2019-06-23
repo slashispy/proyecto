@@ -55,4 +55,15 @@ public class VentaDAOImpl extends AbstractDAO<Venta> implements VentaDAO {
 		}
 	}
 
+	@Override
+	public Venta getByNroFactura(String nroFactura) {
+		try {
+			return (Venta) em.createNamedQuery("Venta.findByFactura")
+					.setParameter("nroFactura", nroFactura)
+					.getSingleResult();
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
+
 }

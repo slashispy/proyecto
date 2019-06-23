@@ -6,4 +6,5 @@ import py.edu.una.rest.model.Venta;
 
 public interface VentaDAO extends GenericDAO<Venta> {
 	List<Venta> getByEstado(String estado);
+	Venta getByNroFactura(String nrofactura);
 }

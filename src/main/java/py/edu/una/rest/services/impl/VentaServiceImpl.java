@@ -82,4 +82,9 @@ public class VentaServiceImpl implements VentaService {
 		return dao.getByEstado(estado);
 	}
 
+	@Override
+	public Venta getByFactura(String nroFactura) {
+		return dao.getByNroFactura(nroFactura);
+	}
+
 }

@@ -73,6 +73,17 @@ public class VentaControllers {
 		}
 	}
 	
+	@RequestMapping(value = "/nroFactura", method = RequestMethod.GET)
+	public ResponseEntity<?> getByNroFactura(@RequestParam String nroFactura) {
+		logger.info("Obteniendo Venta con nroFactura: "+nroFactura );
+		Venta venta = service.getByFactura(nroFactura);
+		if (venta == null) {
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay Venta con el siguiente nroFacura: " + nroFactura),HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Venta>(venta, HttpStatus.OK);
+		}
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> actualizarEstadoVenta(@RequestBody Venta pVenta, @PathVariable("id") Integer id){
 		Venta venta = service.getById(id);
