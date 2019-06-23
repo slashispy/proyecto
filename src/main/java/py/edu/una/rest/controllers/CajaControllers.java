@@ -1,5 +1,6 @@
 package py.edu.una.rest.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -39,7 +40,7 @@ public class CajaControllers {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/abierta/", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> getCajaAbierta(@RequestParam String uso, @RequestParam String usuario){
 		Optional<Usuario> user = usuarioService.getByUsuario(usuario);
 		if(!user.isPresent()) {
@@ -90,6 +91,33 @@ public class CajaControllers {
 		caja.setEstadoCaja(cactualiza.getEstadoCaja());
 		service.actualizar(caja);
 		return new ResponseEntity<Caja>(caja, HttpStatus.OK);	
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> listar() {
+		logger.info("Ejecutando Listar Permisos");
+		List<Caja> cajas = service.listar();
+		if (cajas.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		} else {
+			try {
+				logger.info("Se obtuvo de la base de datos: " + mapper.writeValueAsString(cajas));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return new ResponseEntity<List<Caja>>(cajas, HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+		Caja caja = service.getById(id);
+		if (caja == null) {
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay Caja con el siguiente ID: " + id),HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Caja>(caja, HttpStatus.OK);
+		}
 	}
 
 }
