@@ -34,6 +34,7 @@ public class AuthFilter implements Filter {
 			JWT_INVALID_MSG = "Token JWT invalido";
 	
 	static final long ONE_MINUTE_IN_MILLIS=60000;
+	static final long ONE_HOUR_IN_MILLIS=3600000 ;
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -66,7 +67,7 @@ public class AuthFilter implements Filter {
 					} else {
 						Calendar date = Calendar.getInstance();
 						long t= date.getTimeInMillis();
-						claimSet.setExpirationTime(new Date(t + 10 * ONE_MINUTE_IN_MILLIS));
+						claimSet.setExpirationTime(new Date(t + 4 * ONE_HOUR_IN_MILLIS));
 						chain.doFilter(request, response);
 					}
 				}

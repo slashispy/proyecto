@@ -41,7 +41,7 @@ public final class AuthUtils {
 		claim.setSubject(subject.getUsuario());
 		claim.setIssuer(host);
 		claim.setIssueTime(DateTime.now().toDate());
-		claim.setExpirationTime(DateTime.now().plusMinutes(10).toDate());
+		claim.setExpirationTime(DateTime.now().plusHours(4).toDate());
 //		claim.setExpirationTime(DateTime.now().plusDays(1).toDate());
 //		claim.setClaim("roles", getPermisos(new ArrayList<Permiso>()));
 		claim.setClaim("nombreUsuario", subject.getUsuario());
