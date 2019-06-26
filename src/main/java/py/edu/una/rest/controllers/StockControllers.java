@@ -54,7 +54,7 @@ public class StockControllers {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
 		Stock supplier = service.getById(id);
-		if (supplier == null) {
+		if (supplier == null || supplier.getControlarStock().equals("N")) {
 			return new ResponseEntity<ErrorDTO>(new ErrorDTO("No hay en Stock el siguiente producto con ID: " + id),HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Stock>(supplier, HttpStatus.OK);

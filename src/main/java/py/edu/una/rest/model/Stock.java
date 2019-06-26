@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="stock")
 @NamedQueries({ 
-	@NamedQuery(name = "Stock.findAll", query = "SELECT s FROM Stock s"),
+	@NamedQuery(name = "Stock.findAll", query = "SELECT s FROM Stock s WHERE s.controlarStock = 'S'"),
 	@NamedQuery(name = "Stock.findByControlarStock", query = "SELECT s FROM Stock s WHERE s.controlarStock = :controlarStock")
 })
 public class Stock implements Serializable {
