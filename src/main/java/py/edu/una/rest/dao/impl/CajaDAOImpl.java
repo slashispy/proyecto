@@ -57,4 +57,16 @@ public class CajaDAOImpl extends AbstractDAO<Caja> implements CajaDAO {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Caja> getCajaByUsuario(Usuario usuario) {
+		try {
+			return em.createNamedQuery("Caja.findByUsuario")
+					.setParameter("usuario", usuario)
+					.getResultList();
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
+
 }

@@ -49,4 +49,9 @@ public class CajaServiceImpl implements CajaService {
 		return dao.getCajaAbierta(uso, usuario);
 	}
 
+	@Override
+	public List<Caja> getCajaByUsuario(Usuario usuario) {
+		return dao.getCajaByUsuario(usuario);
+	}
+
 }

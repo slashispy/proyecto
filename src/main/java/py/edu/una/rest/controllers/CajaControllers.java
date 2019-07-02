@@ -95,9 +95,18 @@ public class CajaControllers {
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> listar() {
-		logger.info("Ejecutando Listar Permisos");
-		List<Caja> cajas = service.listar();
+	public ResponseEntity<?> listar(@RequestParam(required = false) String usuario) {
+		logger.info("Ejecutando Listar Caja");
+		List<Caja> cajas;
+		if (usuario == null) {
+			cajas = service.listar();
+		}else {
+			Optional<Usuario> user = usuarioService.getByUsuario(usuario);
+			if(!user.isPresent()) {
+				return new ResponseEntity<ErrorDTO>(new ErrorDTO("Usuario no valido"), HttpStatus.NOT_FOUND);
+			}
+			cajas = service.getCajaByUsuario(user.get());
+		}
 		if (cajas.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		} else {
