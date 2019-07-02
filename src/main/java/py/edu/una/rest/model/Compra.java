@@ -28,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="compras_cab")
 @NamedQueries({
 	@NamedQuery(name="Compra.findAll", query="SELECT c FROM Compra c"),
-	@NamedQuery(name="Compra.findByEstado", query="SELECT c FROM Compra c WHERE c.estado = :estado")
+	@NamedQuery(name="Compra.findByEstado", query="SELECT c FROM Compra c WHERE c.estado = :estado"),
+	@NamedQuery(name="Compra.informe", query="SELECT c FROM Compra c WHERE c.estado = :estado AND c.fecha BETWEEN :desde AND :hasta")
 })
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)

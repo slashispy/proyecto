@@ -27,7 +27,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedQueries({
 	@NamedQuery(name="Venta.findAll", query="SELECT v FROM Venta v"),
 	@NamedQuery(name="Venta.findByEstado", query="SELECT v FROM Venta v WHERE v.estado = :estado"),
-	@NamedQuery(name="Venta.findByFactura", query="SELECT v FROM Venta v WHERE v.nroFactura = :nroFactura")
+	@NamedQuery(name="Venta.findByFactura", query="SELECT v FROM Venta v WHERE v.nroFactura = :nroFactura"),
+	@NamedQuery(name="Venta.informe", query="SELECT v FROM Venta v WHERE v.estado = :estado AND v.fecha BETWEEN :desde AND :hasta")
 })
 public class Venta implements Serializable {
 	

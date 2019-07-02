@@ -1,5 +1,10 @@
 package py.edu.una.rest.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -94,6 +99,36 @@ public class VentaControllers {
 		venta.setEstado(pVenta.getEstado());
 		service.actualizar(venta);
 		return new ResponseEntity<Venta>(venta, HttpStatus.OK);	
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/informe/", method = RequestMethod.GET)
+	public ResponseEntity<?> informe(@RequestParam(required = true) String estado, @RequestParam(required = true) String desde, @RequestParam(required = true) String hasta){
+		logger.info("Ejecutando Informe");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date desdeD = dateFormat.parse(desde);
+			Date hastaD = dateFormat.parse(hasta);
+			desdeD = sumarRestarHorasFecha(desdeD, -4);
+			hastaD = sumarRestarHorasFecha(hastaD, -4);
+			List<Venta> ventas = service.informe(estado, desdeD, hastaD);
+			if (ventas.isEmpty()) {
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
+		} catch (ParseException e) {
+			return new ResponseEntity<ErrorDTO>(new ErrorDTO("Error en el formato de las fechas"), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+	}
+	
+	private Date sumarRestarHorasFecha(Date fecha, int horas) {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.HOUR, horas); // numero de horas a añadir, o restar en caso de horas<0
+		return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
 	}
 
 }

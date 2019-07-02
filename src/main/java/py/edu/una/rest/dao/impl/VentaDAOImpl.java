@@ -1,5 +1,6 @@
 package py.edu.una.rest.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -61,6 +62,20 @@ public class VentaDAOImpl extends AbstractDAO<Venta> implements VentaDAO {
 			return (Venta) em.createNamedQuery("Venta.findByFactura")
 					.setParameter("nroFactura", nroFactura)
 					.getSingleResult();
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Venta> informe(String estado, Date desde, Date hasta) {
+		try {
+			return em.createNamedQuery("Venta.informe")
+					.setParameter("estado", estado)
+					.setParameter("desde", desde)
+					.setParameter("hasta", hasta)
+					.getResultList();
 		}catch(NoResultException e) {
 			return null;
 		}

@@ -1,5 +1,6 @@
 package py.edu.una.rest.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -49,6 +50,20 @@ public class CompraDAOImpl extends AbstractDAO<Compra> implements CompraDAO {
 		try {
 			return em.createNamedQuery("Compra.findByEstado")
 					.setParameter("estado", estado)
+					.getResultList();
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Compra> informe(String estado, Date desde, Date hasta) {
+		try {
+			return em.createNamedQuery("Compra.informe")
+					.setParameter("estado", estado)
+					.setParameter("desde", desde)
+					.setParameter("hasta", hasta)
 					.getResultList();
 		}catch(NoResultException e) {
 			return null;

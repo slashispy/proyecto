@@ -1,5 +1,6 @@
 package py.edu.una.rest.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class CompraServicieImpl implements CompraService {
 	@Override
 	public List<Compra> getByEstado(String estado) {
 		return compraDao.getByEstado(estado);
+	}
+
+	@Override
+	public List<Compra> informe(String estado, Date desde, Date hasta) {
+		return compraDao.informe(estado, desde, hasta);
 	}
 
 }
