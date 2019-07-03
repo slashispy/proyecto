@@ -6,7 +6,7 @@
 	<groupId>py.edu.una</groupId>
 	<artifactId>backEndProy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>backEndProy</name>
 	<description>BackEnd de Proyecto</description>
@@ -33,13 +33,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- <exclusions>
+			<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions> -->
+            </exclusions>
 		</dependency>
+		<dependency>
+      		<groupId>javax.servlet</groupId>
+      		<artifactId>javax.servlet-api</artifactId>
+      		<scope>provided</scope>
+    	</dependency>
 		
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -96,7 +101,20 @@
 	</dependencies>
 
 	<build>
+		<finalName>backEndProy</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Dependencies>jdk.unsupported</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+     
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
